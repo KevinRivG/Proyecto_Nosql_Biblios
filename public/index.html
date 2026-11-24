@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIBLIOS · Biblioteca Solón Argüello</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <div class="app">
+  <aside class="lateral">
+    <div class="marca">
+      <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M8 7h7"/></svg></div>
+      <div>
+        <div class="nombre">BIBLIOS</div>
+        <div class="sub">Biblioteca Solón Argüello<br />No. 0165 · Tepic</div>
+      </div>
+    </div>
+
+    <nav class="pestanas" aria-label="Secciones">
+      <div class="grupo">Acervo</div>
+      <button data-pantalla="catalogo" class="activa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M8 7h7"/></svg>Catálogo</button>
+      <div class="grupo">Lectores</div>
+      <button data-pantalla="usuarios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5"/><path d="M16 5.5a3 3 0 0 1 0 5.6M17.5 14.8c1.5.6 2.6 2 3 4.2"/></svg>Usuarios</button>
+      <button data-pantalla="credencial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.5 1.7-2 3-2s2.4.5 3 2"/><path d="M14 10h4M14 14h3"/></svg>Credencial</button>
+      <div class="grupo">Circulación</div>
+      <button data-pantalla="nuevo-prestamo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Nuevo préstamo</button>
+      <button data-pantalla="prestamos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v16l-5-3-5 3z"/></svg>Préstamos activos</button>
+      <button data-pantalla="historial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</button>
+      <div class="grupo">Informes</div>
+      <button data-pantalla="consultas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Consultas</button>
+    </nav>
+
+    <div class="resumen" id="resumen"><div class="pie">Conectando…</div></div>
+  </aside>
+
+  <main>
+    <!-- ================= 1. CATÁLOGO (Kevin) ================= -->
+    <section id="catalogo" class="pantalla activa">
+      <h2>Buscar en el catálogo</h2>
+      <div class="detalle" id="cat-total">Cargando acervo...</div>
+      <form class="barra" id="cat-form">
+        <input type="search" id="cat-busqueda" placeholder="Título, autor o número de clasificación..." />
+        <select id="cat-sala">
+          <option value="">Todas las salas</option>
+          <option value="GENERAL">General</option>
+          <option value="INFANTIL">Infantil</option>
+          <option value="JUVENIL">Juvenil</option>
+          <option value="CONSULTA">Consulta</option>
+          <option value="NAYARITA">Nayarita</option>
+        </select>
+        <label class="check"><input type="checkbox" id="cat-disponibles" /> Solo disponibles</label>
+        <button class="btn" type="submit">Buscar</button>
+        <button class="btn borde" type="button" id="cat-nuevo">+ Nuevo libro</button>
+      </form>
+      <div class="lista" id="cat-lista"></div>
+      <div class="paginacion" id="cat-paginas"></div>
+    </section>
+
+    <!-- ================= 2. CREDENCIAL (Luis) ================= -->
+    <section id="credencial" class="pantalla">
+      <h2>Credencial de préstamo a domicilio</h2>
+      <div class="detalle">Expedición, consulta, renovación y duplicado de credenciales</div>
+      <form class="barra" id="cred-form">
+        <input type="text" id="cred-numero" placeholder="Número de credencial (ej. 004821)" />
+        <button class="btn" type="submit">Mostrar</button>
+        <button class="btn borde" type="button" id="cred-nueva">+ Nueva credencial</button>
+      </form>
+      <div id="cred-contenido"></div>
+    </section>
+
+    <!-- ================= 3. PRÉSTAMOS (María) ================= -->
+    <section id="prestamos" class="pantalla">
+      <h2>Préstamos activos</h2>
+      <div class="detalle" id="pre-usuario">Captura la credencial del usuario</div>
+      <form class="barra" id="pre-form">
+        <input type="text" id="pre-credencial" placeholder="Número de credencial" />
+        <button class="btn" type="submit">Consultar</button>
+        <button class="btn borde" type="button" id="pre-vencidos">Ver todos los vencidos</button>
+      </form>
+      <div id="pre-contenido"></div>
+    </section>
+
+    <!-- ================= 4. NUEVO PRÉSTAMO (María) ================= -->
+    <section id="nuevo-prestamo" class="pantalla">
+      <h2>Registrar nuevo préstamo</h2>
+      <div class="detalle">Escanea o captura los datos del usuario y el libro</div>
+      <form id="np-form" class="caja">
+        <div class="rejilla">
+          <div>
+            <label for="np-credencial">N° de credencial</label>
+            <input type="text" id="np-credencial" placeholder="004821" autocomplete="off" />
+          </div>
+          <div>
+            <label>Usuario</label>
+            <input type="text" id="np-usuario" readonly placeholder="—" />
+          </div>
+          <div class="ancho">
+            <label for="np-libro">Libro (título o código)</label>
+            <input type="text" id="np-libro" placeholder="Buscar por título o clasificación..." autocomplete="off" />
+            <div class="lista" id="np-resultados" style="margin-top: 6px"></div>
+          </div>
+          <div>
+            <label>Fecha de préstamo</label>
+            <input type="text" id="np-fecha" readonly />
+          </div>
+          <div>
+            <label>Fecha límite</label>
+            <input type="text" id="np-limite" readonly />
+          </div>
+        </div>
+        <div class="barra" style="margin: 16px 0 0">
+          <button class="btn" type="submit" id="np-registrar">Registrar préstamo</button>
+          <button class="btn borde oculto" type="button" id="np-apartar">Apartar libro</button>
+        </div>
+      </form>
+      <div id="np-comprobante"></div>
+    </section>
+
+    <!-- ================= 5. HISTORIAL (María) ================= -->
+    <section id="historial" class="pantalla">
+      <h2>Historial de préstamos</h2>
+      <div class="detalle" id="his-usuario">Captura la credencial del usuario</div>
+      <form class="barra" id="his-form">
+        <input type="text" id="his-credencial" placeholder="Número de credencial" />
+        <button class="btn" type="submit">Consultar</button>
+      </form>
+      <div id="his-contenido"></div>
+    </section>
+
+    <!-- ================= 6. USUARIOS (Luis) ================= -->
+    <section id="usuarios" class="pantalla">
+      <h2>Usuarios registrados</h2>
+      <div class="detalle" id="usu-total">Cargando...</div>
+      <form class="barra" id="usu-form">
+        <input type="search" id="usu-busqueda" placeholder="Buscar por nombre o número de credencial..." />
+        <select id="usu-situacion">
+          <option value="">Todas</option>
+          <option value="ACTIVA">Activas</option>
+          <option value="VENCIDA">Vencidas</option>
+          <option value="SUSPENDIDA">Suspendidas</option>
+          <option value="CANCELADA">Canceladas</option>
+        </select>
+        <button class="btn" type="submit">Buscar</button>
+        <button class="btn borde" type="button" id="usu-nuevo">+ Nuevo registro</button>
+      </form>
+      <div class="lista" id="usu-lista"></div>
+      <div class="paginacion" id="usu-paginas"></div>
+    </section>
+
+    <!-- ================= 7. CONSULTAS ================= -->
+    <section id="consultas" class="pantalla">
+      <h2>Consultas e informes</h2>
+      <div class="detalle">30 consultas con aggregation pipeline, 10 por cada área del sistema</div>
+      <div class="barra">
+        <select id="con-lista" style="flex: 1"></select>
+      </div>
+      <div class="descripcion-consulta" id="con-descripcion"></div>
+      <form class="barra" id="con-form"></form>
+      <div class="resultado-consulta" id="con-resultado"></div>
+    </section>
+  </main>
+  </div>
+
+  <div class="fondo-modal" id="modal">
+    <div class="modal">
+      <button class="cerrar" id="modal-cerrar" title="Cerrar">&times;</button>
+      <div id="modal-contenido"></div>
+    </div>
+  </div>
+  <div id="avisos"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
