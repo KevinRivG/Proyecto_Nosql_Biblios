@@ -37,7 +37,6 @@ Proyecto final de **Laboratorio de Bases de Datos NoSQL** — Instituto Tecnoló
 | Base de datos | MongoDB Atlas (plan gratuito) con Mongoose 9 |
 | API | Apollo Server 5 + GraphQL sobre Express 5, endpoint único `POST /graphql` |
 | Front | HTML, CSS y JavaScript sin frameworks, conectado con `fetch()` a GraphQL |
-| Datos de prueba | Generador propio (1000 documentos por colección) |
 
 La comparación entre MongoDB y Neo4j que justifica esta elección está en el documento técnico del proyecto.
 
@@ -71,13 +70,9 @@ PORT=4000
 - En **Network Access** agrega tu IP (o `0.0.0.0/0` mientras se prueba).
 - El archivo `.env` **no se sube** al repositorio, ya viene en `.gitignore`.
 
-### 3. Cargar los datos de prueba
+### 3. Los datos
 
-```bash
-npm run seed
-```
-
-Borra las colecciones y carga **1000 documentos en cada una**: fiadores, usuarios, libros y préstamos. Los datos simulan dos años de operación de la biblioteca y cumplen el reglamento.
+La base `biblios` en Atlas ya tiene **1000 documentos en cada colección**: fiadores, usuarios, libros y préstamos. Los datos simulan dos años de operación de la biblioteca y cumplen el reglamento. No hay que cargar nada: basta con que el `.env` apunte al cluster del equipo.
 
 ### 4. Levantar el servidor
 
@@ -96,8 +91,6 @@ npm run dev
 |---|---|
 | `npm run dev` | Levanta el servidor y se reinicia solo al guardar cambios |
 | `npm start` | Levanta el servidor sin reinicio automático |
-| `npm run seed` | Reinicia la base con 1000 documentos por colección |
-| `npm run prueba` | Con el servidor corriendo, prueba los CRUD, las reglas del reglamento y las 30 consultas. Al terminar borra lo que creó |
 
 ## Guía de uso
 
@@ -301,8 +294,6 @@ src/
   graphql/resolvers/        Queries y Mutations con las reglas del reglamento
   consultas/                las 30 consultas (aggregation pipeline)
   utils/reglas.js           constantes del reglamento (3 libros, 7 días, 2 años...)
-seed/                       generador de los datos de prueba
-scripts/probar.js           prueba de punta a punta
 public/
   index.html                estructura del front
   css/estilos.css           estilos
@@ -317,4 +308,4 @@ public/
 | `Falta la variable MONGO_URI` | No existe el `.env`: cópialo de `.env.example` |
 | `EADDRINUSE: 4000` | El puerto está ocupado: cierra el otro servidor o cambia `PORT` en `.env` |
 | La página no muestra cambios | Recarga con **Ctrl + Shift + R** |
-| Los conteos ya no son 1000 | Los préstamos o registros hechos a mano se guardan: corre `npm run seed` para reiniciar |
+| Las pantallas salen vacías | Revisa que `DB_NAME` sea `biblios` y que `MONGO_URI` sea la del cluster del equipo |
