@@ -121,6 +121,8 @@ export function iniciarNuevoPrestamo() {
     if (!r) return;
     $('#np-comprobante').innerHTML = comprobante(r.crearPrestamo) + $('#np-comprobante').innerHTML;
     aviso(`Préstamo registrado con folio ${r.crearPrestamo.folioTexto}`);
+    // deja lista la credencial en "Préstamos activos" para que ahí aparezca el préstamo nuevo
+    $('#pre-credencial').value = credencial;
     libroElegido = null;
     $('#np-libro').value = '';
     ponerFechas();

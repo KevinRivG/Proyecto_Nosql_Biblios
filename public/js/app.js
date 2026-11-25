@@ -12,6 +12,10 @@ function cambiarPantalla(id) {
   $$('nav.pestanas button').forEach((b) => b.classList.toggle('activa', b.dataset.pantalla === id));
   $$('.pantalla').forEach((p) => p.classList.toggle('activa', p.id === id));
   history.replaceState(null, '', `#${id}`);
+
+  // al entrar a Préstamos activos se vuelve a consultar, para no mostrar datos viejos
+  if (id === 'prestamos' && $('#pre-credencial').value.trim()) $('#pre-form').requestSubmit();
+  cargarResumen();
 }
 
 async function cargarResumen() {
@@ -39,13 +43,13 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') cerrarModal();
 });
 
-const inicial = location.hash.slice(1);
-if (inicial && $(`#${inicial}.pantalla`)) cambiarPantalla(inicial);
-
 iniciarCatalogo();
 iniciarCredencial();
 iniciarPrestamos();
 iniciarNuevoPrestamo();
 iniciarUsuarios();
 iniciarConsultas();
-cargarResumen();
+
+const inicial = location.hash.slice(1);
+if (inicial && $(`#${inicial}.pantalla`)) cambiarPantalla(inicial);
+else cargarResumen();
