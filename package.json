@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "node --watch src/index.js",
-    "prueba": "node scripts/probar.js"
+    "dev": "node --watch src/index.js"
   },
   "author": "Durán Castañeda Luis, Rivera González Kevin, Zepeda Castañeda María Fernanda",
   "license": "ISC",

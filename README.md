@@ -37,7 +37,6 @@ Proyecto final de **Laboratorio de Bases de Datos NoSQL** — Instituto Tecnoló
 | Base de datos | MongoDB Atlas (plan gratuito) con Mongoose 9 |
 | API | Apollo Server 5 + GraphQL sobre Express 5, endpoint único `POST /graphql` |
 | Front | HTML, CSS y JavaScript sin frameworks, conectado con `fetch()` a GraphQL |
-| Datos de prueba | Generador propio (1000 documentos por colección) |
 
 La comparación entre MongoDB y Neo4j que justifica esta elección está en el documento técnico del proyecto.
 
@@ -92,7 +91,6 @@ npm run dev
 |---|---|
 | `npm run dev` | Levanta el servidor y se reinicia solo al guardar cambios |
 | `npm start` | Levanta el servidor sin reinicio automático |
-| `npm run prueba` | Con el servidor corriendo, prueba los CRUD, las reglas del reglamento y las 30 consultas. Al terminar borra lo que creó |
 
 ## Guía de uso
 
@@ -296,7 +294,6 @@ src/
   graphql/resolvers/        Queries y Mutations con las reglas del reglamento
   consultas/                las 30 consultas (aggregation pipeline)
   utils/reglas.js           constantes del reglamento (3 libros, 7 días, 2 años...)
-scripts/probar.js           prueba de punta a punta
 public/
   index.html                estructura del front
   css/estilos.css           estilos
